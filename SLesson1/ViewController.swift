@@ -9,10 +9,14 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet var buttonCollection: [UIButton]!
     @IBOutlet weak var touchLabel: UILabel!
     
-    let emojiCollection = ["🦊","🐰","🦊","🐰"]
+    @IBOutlet var buttonsBigCollection: [UIButton]!
+    
+    let emojiList = ["🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼"]
+    var bigEmojiList: [String] = []
+    var buttonsIndex: [Int] = []
+    
     
     var touches = 0 {
         didSet {
@@ -35,10 +39,16 @@ class ViewController: UIViewController {
     
     @IBAction func buttonAction(_ sender: UIButton) {
         touches += 1
-        if let buttonIndex = buttonCollection.firstIndex(of: sender) {
-            flipButton(emoji: emojiCollection[buttonIndex], button: sender)
+        if let buttonIndex = buttonsBigCollection.firstIndex(of: sender) {
+            flipButton(emoji: bigEmojiList[buttonIndex], button: sender)
+            
         }
         
+        
+    }
+    
+    
+    func buttonsRandom(emojiList: [String]){
         
     }
     
@@ -47,14 +57,20 @@ class ViewController: UIViewController {
     
     
     
-    
-    
-    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//        // Do any additional setup after loading the view.
-//    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        bigEmojiList.append(contentsOf: emojiList)
+        bigEmojiList.append(contentsOf: emojiList)
+        
+        print(bigEmojiList)
+        
+        for i in 0...bigEmojiList.count-1{
+            bigEmojiList.swapAt(i, Int.random(in: 0..<bigEmojiList.count))
+        }
+        
+        print(bigEmojiList)
+        // Do any additional setup after loading the view.
+    }
 
 }
 
