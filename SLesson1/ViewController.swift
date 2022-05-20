@@ -13,17 +13,54 @@ class ViewController: UIViewController {
     
     @IBOutlet var buttonsBigCollection: [UIButton]!
     
+    var enableButtons = true
     let emojiList = ["🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼"]
     var bigEmojiList: [String] = []
     var buttonsIndex: [Int] = []
-    
-    
-    var touches = 0 {
-        didSet {
-            touchLabel.text = "Touches: \(touches)"
+    var pairButtons: [UIButton] = []{
+        
+        didSet{
+            
+            
+            if pairButtons.count == 2{
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+                    
+                    if !self.checkExact(buttons: self.pairButtons){
+                        self.clearButtons(buttons: self.pairButtons)
+                    }
+                    
+                    
+                    self.enableButtons = true
+                    self.pairButtons = []
+                }
+            }
+            
+            if pairButtons.count>=2{
+                enableButtons = false
+            }
         }
     }
     
+    var touches = 0{
+        didSet{
+            touchLabel.text = "Points: \(touches)"
+        }
+    }
+    
+    func checkExact(buttons: [UIButton]) -> Bool{
+        if buttons[0].currentTitle! == buttons[1].currentTitle!{
+            touches+=1
+            return true
+        }
+        return false
+    }
+    
+    func clearButtons(buttons: [UIButton]){
+        for button in buttons{
+            button.setTitle("", for: .normal)
+            button.backgroundColor = #colorLiteral(red: 0.07922752947, green: 0.4794213772, blue: 1, alpha: 1)
+        }
+    }
     
     func flipButton(emoji: String, button: UIButton){
         if button.currentTitle == emoji {
@@ -38,11 +75,16 @@ class ViewController: UIViewController {
     
     
     @IBAction func buttonAction(_ sender: UIButton) {
-        touches += 1
-        if let buttonIndex = buttonsBigCollection.firstIndex(of: sender) {
-            flipButton(emoji: bigEmojiList[buttonIndex], button: sender)
-            
+
+        if enableButtons{
+            if let buttonIndex = buttonsBigCollection.firstIndex(of: sender) {
+                
+                flipButton(emoji: bigEmojiList[buttonIndex], button: sender)
+                
+                pairButtons.append(sender)
+            }
         }
+        
         
         
     }
