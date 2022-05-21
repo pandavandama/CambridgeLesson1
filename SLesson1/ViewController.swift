@@ -8,16 +8,32 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    
+    
     @IBOutlet weak var touchLabel: UILabel!
     
     @IBOutlet var buttonsBigCollection: [UIButton]!
+    
+    func getResult()->Bool{
+        return self.getResult()
+    }
     
     var enableButtons = true
     let emojiList = ["🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼"]
     var bigEmojiList: [String] = []
     var buttonsIndex: [Int] = []
+    public bvar result: Bool!
     
+    var tries = 8{
+        didSet{
+            touchLabel.text = "Tries: \(tries)"
+            if tries<=0{
+                result = false
+                clearAndShowResult()
+            }
+        }
+    }
     let tapticFeedback = UINotificationFeedbackGenerator()
     
     var pairButtons: [UIButton] = []{
@@ -30,6 +46,9 @@ class ViewController: UIViewController {
                     
                     if !self.checkExact(buttons: self.pairButtons){
                         self.clearButtons(buttons: self.pairButtons)
+                        self.tries-=1
+                    }else{
+                        
                     }
                     
                     
@@ -44,15 +63,35 @@ class ViewController: UIViewController {
         }
     }
     
-    var touches = 0{
+    func showViewController(){
+        var storyboard = UIStoryboard(name: "Main", bundle: nil)
+        var secondVC = storyboard.instantiateViewController(identifier: "resultView")
+     show(secondVC, sender: self)
+    }
+    
+    var points = 0{
         didSet{
-            touchLabel.text = "Points: \(touches)"
+            
+            if points>=emojiList.count{
+                result = true
+                clearAndShowResult()
+            }
+        }
+    }
+    
+    func clearAndShowResult(){
+       
+        showViewController()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+            self.clearButtons(buttons: self.buttonsBigCollection)
+            self.emojiRandomizer()
+            self.points = 0
         }
     }
     
     func checkExact(buttons: [UIButton]) -> Bool{
         if buttons[0].currentTitle! == buttons[1].currentTitle!{
-            touches+=1
+            points+=1
             return true
         }
         return false
@@ -71,24 +110,19 @@ class ViewController: UIViewController {
             button.backgroundColor = #colorLiteral(red: 0.07922752947, green: 0.4794213772, blue: 1, alpha: 1)
         } else {
             button.setTitle(emoji, for: .normal)
-            button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-            print(button.backgroundColor!," test")
+            button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
         }
-
+        
     }
     
     
     @IBAction func buttonAction(_ sender: UIButton) {
-
+        
         if enableButtons{
             tapticFeedback.notificationOccurred(.success)
             if let buttonIndex = buttonsBigCollection.firstIndex(of: sender) {
                 
                 if sender.currentTitle == "" {
-                    print(sender.backgroundColor!)
-                    print("Title: ", sender.currentTitle!)
-                    print(sender.backgroundColor!==#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
-                    
                     flipButton(emoji: bigEmojiList[buttonIndex], button: sender)
                     pairButtons.append(sender)
                 }
@@ -100,38 +134,32 @@ class ViewController: UIViewController {
                 
             }
         }
-        
-        
-        
-    }
-    
-    
-    func buttonsRandom(emojiList: [String]){
+//        showViewController()
         
     }
-    
-    
-    
-    
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         bigEmojiList.append(contentsOf: emojiList)
         bigEmojiList.append(contentsOf: emojiList)
         
-        print(bigEmojiList)
         
-        for i in 0...bigEmojiList.count-1{
-            bigEmojiList.swapAt(i, Int.random(in: 0..<bigEmojiList.count))
-        }
+        
         for button in buttonsBigCollection{
             button.setTitle("", for: .normal)
         }
         
-        print(bigEmojiList)
-        // Do any additional setup after loading the view.
+        
     }
+    
+    func emojiRandomizer(){
+        for i in 0...bigEmojiList.count-1{
+            bigEmojiList.swapAt(i, Int.random(in: 0..<bigEmojiList.count))
+        }
+    }
+    
+    
 
+    
 }
 
