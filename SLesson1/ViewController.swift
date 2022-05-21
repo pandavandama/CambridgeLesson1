@@ -17,6 +17,9 @@ class ViewController: UIViewController {
     let emojiList = ["🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼"]
     var bigEmojiList: [String] = []
     var buttonsIndex: [Int] = []
+    
+    let tapticFeedback = UINotificationFeedbackGenerator()
+    
     var pairButtons: [UIButton] = []{
         
         didSet{
@@ -77,6 +80,7 @@ class ViewController: UIViewController {
     @IBAction func buttonAction(_ sender: UIButton) {
 
         if enableButtons{
+            tapticFeedback.notificationOccurred(.success)
             if let buttonIndex = buttonsBigCollection.firstIndex(of: sender) {
                 
                 flipButton(emoji: bigEmojiList[buttonIndex], button: sender)
