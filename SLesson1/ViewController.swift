@@ -72,6 +72,7 @@ class ViewController: UIViewController {
         } else {
             button.setTitle(emoji, for: .normal)
             button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            print(button.backgroundColor!," test")
         }
 
     }
@@ -83,9 +84,20 @@ class ViewController: UIViewController {
             tapticFeedback.notificationOccurred(.success)
             if let buttonIndex = buttonsBigCollection.firstIndex(of: sender) {
                 
-                flipButton(emoji: bigEmojiList[buttonIndex], button: sender)
+                if sender.currentTitle == "" {
+                    print(sender.backgroundColor!)
+                    print("Title: ", sender.currentTitle!)
+                    print(sender.backgroundColor!==#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
+                    
+                    flipButton(emoji: bigEmojiList[buttonIndex], button: sender)
+                    pairButtons.append(sender)
+                }
+                else{
+                    
+                }
                 
-                pairButtons.append(sender)
+                
+                
             }
         }
         
@@ -112,6 +124,9 @@ class ViewController: UIViewController {
         
         for i in 0...bigEmojiList.count-1{
             bigEmojiList.swapAt(i, Int.random(in: 0..<bigEmojiList.count))
+        }
+        for button in buttonsBigCollection{
+            button.setTitle("", for: .normal)
         }
         
         print(bigEmojiList)
