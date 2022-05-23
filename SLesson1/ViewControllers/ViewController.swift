@@ -23,18 +23,20 @@ class ViewController: UIViewController {
     let emojiList = ["🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼"]
     var bigEmojiList: [String] = []
     var buttonsIndex: [Int] = []
-    public bvar result: Bool!
+    public var result: Bool!
     
-    var tries = 8{
+    var tries: Int!{
         didSet{
-            touchLabel.text = "Tries: \(tries)"
+            touchLabel.text = "Tries: \(tries!)"
             if tries<=0{
                 result = false
                 clearAndShowResult()
+                
             }
         }
     }
     let tapticFeedback = UINotificationFeedbackGenerator()
+    
     
     var pairButtons: [UIButton] = []{
         
@@ -86,6 +88,7 @@ class ViewController: UIViewController {
             self.clearButtons(buttons: self.buttonsBigCollection)
             self.emojiRandomizer()
             self.points = 0
+            self.tries = 8
         }
     }
     
@@ -137,7 +140,8 @@ class ViewController: UIViewController {
 //        showViewController()
         
     }
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         bigEmojiList.append(contentsOf: emojiList)

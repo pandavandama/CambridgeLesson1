@@ -15,28 +15,20 @@ class ResultViewController:
     
     @IBOutlet weak var resultSymbol: UILabel!
     
+    @IBOutlet weak var resultHeader: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        if ViewController.getResult(ViewController) == true{
-//            resultSymbol.text = "❤️"
-//        }else{
-//            resultSymbol.text = "❤️‍🩹"
-//        }
-        // Do any additional setup after loading the view.
+        if dataApp.result{
+            resultSymbol.text = "❤️"
+            resultHeader.text = "You win!"
+        }else{
+            resultSymbol.text = "💔"
+            resultHeader.text = "Try again..."
+        }
+
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
     
     
