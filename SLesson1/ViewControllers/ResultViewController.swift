@@ -27,16 +27,22 @@ class ResultViewController:
             resultSymbol.text = "💔"
             resultHeader.text = "Try again..."
         }
-
+        
     }
-    
-    
     
     @IBAction func quitAction(_ sender: UIButton) {
         print("Quit")
         exit(0)
     }
+    
     @IBAction func showMainView(_ sender: UIButton) {
-        dismiss(animated: false)
+        showNextViewController()
+    }
+    
+    func showNextViewController(){
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "difficultyView")
+        nextViewController.modalPresentationStyle = .fullScreen
+        self.present(nextViewController, animated: false, completion: nil)
     }
 }

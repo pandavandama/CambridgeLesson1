@@ -15,12 +15,9 @@ class ViewController: UIViewController {
     
     @IBOutlet var buttonsBigCollection: [UIButton]!
     
-    func getResult()->Bool{
-        return self.getResult()
-    }
-    
-    var enableButtons = true
+    let tapticFeedback = UINotificationFeedbackGenerator()
     let emojiList = ["🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼"]
+    var enableButtons = true
     var bigEmojiList: [String] = []
     var buttonsIndex: [Int] = []
     public var result: Bool!
@@ -29,61 +26,64 @@ class ViewController: UIViewController {
         didSet{
             touchLabel.text = "Tries: \(tries!)"
             if tries<=0{
-                result = false
-                clearAndShowResult()
-                
+                lose()
             }
         }
     }
-    let tapticFeedback = UINotificationFeedbackGenerator()
-    
     
     var pairButtons: [UIButton] = []{
-        
         didSet{
-            
-            
             if pairButtons.count == 2{
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1){
-                    
                     if !self.checkExact(buttons: self.pairButtons){
                         self.clearButtons(buttons: self.pairButtons)
                         self.tries-=1
                     }else{
-                        
                     }
-                    
-                    
                     self.enableButtons = true
                     self.pairButtons = []
                 }
             }
-            
             if pairButtons.count>=2{
                 enableButtons = false
             }
         }
     }
     
-    func showViewController(){
-        var storyboard = UIStoryboard(name: "Main", bundle: nil)
-        var secondVC = storyboard.instantiateViewController(identifier: "resultView")
-     show(secondVC, sender: self)
-    }
-    
     var points = 0{
         didSet{
             
             if points>=emojiList.count{
-                result = true
-                clearAndShowResult()
+                win()
             }
         }
     }
     
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        bigEmojiList.append(contentsOf: emojiList)
+        bigEmojiList.append(contentsOf: emojiList)
+        
+        
+        tries = dataApp.triesMax
+        
+        for button in buttonsBigCollection{
+            button.setTitle("", for: .normal)
+        }
+        
+    }
+    
+    func showNextViewController(){
+        var storyboard = UIStoryboard(name: "Main", bundle: nil)
+        var nextViewController = storyboard.instantiateViewController(identifier: "resultView")
+        nextViewController.modalPresentationStyle = .fullScreen
+        self.present(nextViewController, animated: true, completion: nil)
+    }
+    
+    
     func clearAndShowResult(){
-       
-        showViewController()
+        showNextViewController()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1){
             self.clearButtons(buttons: self.buttonsBigCollection)
             self.emojiRandomizer()
@@ -102,20 +102,29 @@ class ViewController: UIViewController {
     
     func clearButtons(buttons: [UIButton]){
         for button in buttons{
-            button.setTitle("", for: .normal)
-            button.backgroundColor = #colorLiteral(red: 0.07922752947, green: 0.4794213772, blue: 1, alpha: 1)
+            clearButton(button)
         }
     }
     
     func flipButton(emoji: String, button: UIButton){
-        if button.currentTitle == emoji {
-            button.setTitle("", for: .normal)
-            button.backgroundColor = #colorLiteral(red: 0.07922752947, green: 0.4794213772, blue: 1, alpha: 1)
-        } else {
-            button.setTitle(emoji, for: .normal)
-            button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+        button.currentTitle == emoji ? clearButton(button) : fillButton(emoji,button)
+    }
+    
+    func clearButton(_ button: UIButton){
+        button.setTitle("", for: .normal)
+        button.backgroundColor = #colorLiteral(red: 0.07922752947, green: 0.4794213772, blue: 1, alpha: 1)
+    }
+    
+    func fillButton(_ symbol: String,_ button: UIButton){
+        button.setTitle(symbol, for: .normal)
+        button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+    }
+    
+    
+    func emojiRandomizer(){
+        for i in 0...bigEmojiList.count-1{
+            bigEmojiList.swapAt(i, Int.random(in: 0..<bigEmojiList.count))
         }
-        
     }
     
     
@@ -132,38 +141,17 @@ class ViewController: UIViewController {
                 else{
                     
                 }
-                
-                
-                
             }
         }
-//        showViewController()
-        
     }
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        bigEmojiList.append(contentsOf: emojiList)
-        bigEmojiList.append(contentsOf: emojiList)
-        
-        
-        
-        for button in buttonsBigCollection{
-            button.setTitle("", for: .normal)
-        }
-        
-        
+    func win(){
+        result = true
+        clearAndShowResult()
     }
-    
-    func emojiRandomizer(){
-        for i in 0...bigEmojiList.count-1{
-            bigEmojiList.swapAt(i, Int.random(in: 0..<bigEmojiList.count))
-        }
-    }
-    
-    
+    func lose(){
+        result = false
+        clearAndShowResult()
 
-    
+    }
 }
-

@@ -8,37 +8,27 @@
 import UIKit
 
 class DifficultyViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
     
-    let nextViewController: ViewController = ViewController()
-
-
+    
     @IBAction func difficultySet(_ sender: UIButton) {
         
-//        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        self.present(nextViewController, animated: true, completion: nil)
-        
-        print(sender.titleLabel!.text!)
-        switch sender.titleLabel!.text!{
-        case "Easy":
-            
-            print("Easy")
-        
-        case "Medium":
-            print("Medium")
-        
-        case "Hard":
-            print("Hard")
-        
+        switch sender.restorationIdentifier{
+        case "buttonEasy":
+            dataApp.triesMax = 25
+        case "buttonMedium":
+            dataApp.triesMax = 16
+        case "buttonHard":
+            dataApp.triesMax = 8
         default:
-            break
+            return
         }
+        showNextViewController()
     }
     
+    func showNextViewController(){
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "gameView")
+        nextViewController.modalPresentationStyle = .fullScreen
+        self.present(nextViewController, animated: false, completion: nil)
+    }
 }

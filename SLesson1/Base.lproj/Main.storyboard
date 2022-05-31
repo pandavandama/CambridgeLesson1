@@ -11,7 +11,7 @@
         <!--Difficulty View Controller-->
         <scene sceneID="m5D-mg-7cZ">
             <objects>
-                <viewController id="2Xn-bi-Ob2" customClass="DifficultyViewController" customModule="SLesson1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="difficultyView" id="2Xn-bi-Ob2" customClass="DifficultyViewController" customModule="SLesson1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MIz-Eg-ZLF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -25,7 +25,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="xYT-uF-zec">
                                 <rect key="frame" x="73" y="408" width="268" height="80"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zvN-2C-RZC">
+                                    <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="buttonEasy" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zvN-2C-RZC">
                                         <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                                         <constraints>
@@ -33,13 +33,13 @@
                                             <constraint firstAttribute="width" constant="80" id="LgL-lr-5Hl"/>
                                         </constraints>
                                         <color key="tintColor" systemColor="systemBackgroundColor"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Easy"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Easy"/>
                                         <connections>
                                             <action selector="difficultySet:" destination="2Xn-bi-Ob2" eventType="touchUpInside" id="aX4-6e-tte"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bws-NQ-Nht">
+                                    <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="buttonMedium" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bws-NQ-Nht">
                                         <rect key="frame" x="94" y="0.0" width="80" height="80"/>
                                         <color key="backgroundColor" systemColor="systemYellowColor"/>
                                         <constraints>
@@ -47,18 +47,22 @@
                                             <constraint firstAttribute="height" constant="80" id="otw-sq-lKH"/>
                                         </constraints>
                                         <color key="tintColor" systemColor="systemBackgroundColor"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Medium"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Medium"/>
                                         <connections>
                                             <action selector="difficultySet:" destination="2Xn-bi-Ob2" eventType="touchUpInside" id="0We-eW-bUL"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QdV-wV-9k3">
+                                    <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="buttonHard" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QdV-wV-9k3">
                                         <rect key="frame" x="188" y="0.0" width="80" height="80"/>
                                         <color key="backgroundColor" systemColor="systemRedColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="9UG-f9-fmN"/>
+                                            <constraint firstAttribute="height" constant="80" id="Pjt-RQ-wRK"/>
+                                        </constraints>
                                         <color key="tintColor" systemColor="systemBackgroundColor"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Hard"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Hard"/>
                                         <connections>
                                             <action selector="difficultySet:" destination="2Xn-bi-Ob2" eventType="touchUpInside" id="GY0-Z9-uso"/>
                                         </connections>
