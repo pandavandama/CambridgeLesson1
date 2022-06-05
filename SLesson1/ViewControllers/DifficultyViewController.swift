@@ -10,6 +10,13 @@ import UIKit
 class DifficultyViewController: UIViewController {
     
     
+    @IBOutlet weak var myExitButton: UIButton!
+    
+
+    @IBAction func exitButtonClick(_ sender: Any) {
+        exit(0)
+    }
+    
     @IBAction func difficultySet(_ sender: UIButton) {
         
         switch sender.restorationIdentifier{

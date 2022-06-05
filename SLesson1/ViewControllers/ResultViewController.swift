@@ -27,7 +27,6 @@ class ResultViewController:
             resultSymbol.text = "💔"
             resultHeader.text = "Try again..."
         }
-        
     }
     
     @IBAction func quitAction(_ sender: UIButton) {

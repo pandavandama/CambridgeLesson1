@@ -6,14 +6,23 @@
 //
 
 import UIKit
+import AVFoundation
+
 
 class ViewController: UIViewController {
     
     
+    var audioPlayer: AVAudioPlayer?
+    var soundtrackPlayer: AVAudioPlayer?
+    
+    var soundsUrls: [URL?] = []
     
     @IBOutlet weak var touchLabel: UILabel!
     
     @IBOutlet var buttonsBigCollection: [UIButton]!
+    
+    
+    @IBOutlet weak var myProgressView: UIProgressView!
     
     let tapticFeedback = UINotificationFeedbackGenerator()
     let emojiList = ["🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼"]
@@ -21,6 +30,8 @@ class ViewController: UIViewController {
     var bigEmojiList: [String] = []
     var buttonsIndex: [Int] = []
     public var result: Bool!
+    
+    public var progressMax: Float = 0
     
     var tries: Int!{
         didSet{
@@ -52,7 +63,6 @@ class ViewController: UIViewController {
     
     var points = 0{
         didSet{
-            
             if points>=emojiList.count{
                 win()
             }
@@ -62,15 +72,47 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        soundsInit()
+        
+        do{
+            soundtrackPlayer = try AVAudioPlayer(contentsOf: soundsUrls[5]!)
+            soundtrackPlayer?.numberOfLoops = -1
+            soundtrackPlayer!.play()
+        }
+        catch{
+            
+        }
+        
         bigEmojiList.append(contentsOf: emojiList)
         bigEmojiList.append(contentsOf: emojiList)
         
-        
+        progressMax = Float(emojiList.count)
+        myProgressView.progress = 0
         tries = dataApp.triesMax
         
         for button in buttonsBigCollection{
             button.setTitle("", for: .normal)
         }
+        
+    }
+    
+    func soundsInit(){
+        
+        var test1 = URL(fileURLWithPath: Bundle.main.path(forResource: "a1", ofType: "mp3")!)
+        
+        print(test1)
+        soundsUrls.append(URL(fileURLWithPath: Bundle.main.path(forResource: "a1", ofType: "mp3")!))
+        print(soundsUrls.count)
+        soundsUrls.append(URL(fileURLWithPath: Bundle.main.path(forResource: "a2", ofType: "mp3")!))
+        soundsUrls.append(URL(fileURLWithPath: Bundle.main.path(forResource: "a3", ofType: "mp3")!))
+        soundsUrls.append(URL(fileURLWithPath: Bundle.main.path(forResource: "a4", ofType: "mp3")!))
+        soundsUrls.append(URL(fileURLWithPath: Bundle.main.path(forResource: "a5", ofType: "mp3")!))
+        soundsUrls.append(URL(fileURLWithPath: Bundle.main.path(forResource: "soundtrack", ofType: "mp3")!))
+        soundsUrls.append(URL(fileURLWithPath: Bundle.main.path(forResource: "btn_click_sound", ofType: "mp3")!))
+    }
+    
+    func playSoundtrack(){
         
     }
     
@@ -89,13 +131,31 @@ class ViewController: UIViewController {
             self.emojiRandomizer()
             self.points = 0
             self.tries = 8
+            self.soundtrackPlayer?.stop()
         }
     }
     
     func checkExact(buttons: [UIButton]) -> Bool{
         if buttons[0].currentTitle! == buttons[1].currentTitle!{
             points+=1
+            myProgressView.progress += 1/Float(emojiList.count)
+            print(myProgressView.progress)
+            do{
+                audioPlayer = try AVAudioPlayer(contentsOf: soundsUrls[0]!)
+                audioPlayer!.play()
+            }
+            catch{
+                
+            }
             return true
+        }else{
+            do{
+                audioPlayer = try AVAudioPlayer(contentsOf: soundsUrls[Int.random(in: 1...2)]!)
+                audioPlayer!.play()
+            }
+            catch{
+                
+            }
         }
         return false
     }
@@ -127,6 +187,7 @@ class ViewController: UIViewController {
         }
     }
     
+
     
     @IBAction func buttonAction(_ sender: UIButton) {
         
@@ -143,15 +204,46 @@ class ViewController: UIViewController {
                 }
             }
         }
+        do {
+                    audioPlayer = try AVAudioPlayer(contentsOf: soundsUrls[6]!)
+                    audioPlayer!.play()
+                    
+               } catch {
+                  // couldn't load file :(
+               }
+    }
+    
+    
+    @IBAction func myExitButton(_ sender: Any) {
+        exit(0)
     }
     
     func win(){
-        result = true
+        dataApp.result = true
+        
+        do{
+            audioPlayer = try AVAudioPlayer(contentsOf: soundsUrls[4]!)
+            audioPlayer!.play()
+        }
+        catch{
+            
+        }
+        
+        
         clearAndShowResult()
     }
     func lose(){
-        result = false
+        dataApp.result = false
+        
+        
+        
+        do{
+            audioPlayer = try AVAudioPlayer(contentsOf: soundsUrls[3]!)
+            audioPlayer!.play()
+        }
+        catch{
+            
+        }
         clearAndShowResult()
-
     }
 }
