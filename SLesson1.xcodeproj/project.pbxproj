@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB151B94284E7070003B364C /* PersonsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB151B93284E7070003B364C /* PersonsListViewController.swift */; };
+		CB151B97284E722D003B364C /* PersonsElementTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB151B95284E722D003B364C /* PersonsElementTableViewCell.swift */; };
+		CB151B98284E722D003B364C /* PersonsElementTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB151B96284E722D003B364C /* PersonsElementTableViewCell.xib */; };
+		CB151B9A284E7251003B364C /* PersonsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB151B99284E7251003B364C /* PersonsListTableViewController.swift */; };
 		CB17A4B228355FB400C42932 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB17A4B128355FB400C42932 /* AppDelegate.swift */; };
 		CB17A4B428355FB400C42932 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB17A4B328355FB400C42932 /* SceneDelegate.swift */; };
 		CB17A4B628355FB400C42932 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB17A4B528355FB400C42932 /* ViewController.swift */; };
@@ -27,6 +31,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CB151B93284E7070003B364C /* PersonsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonsListViewController.swift; sourceTree = "<group>"; };
+		CB151B95284E722D003B364C /* PersonsElementTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonsElementTableViewCell.swift; sourceTree = "<group>"; };
+		CB151B96284E722D003B364C /* PersonsElementTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonsElementTableViewCell.xib; sourceTree = "<group>"; };
+		CB151B99284E7251003B364C /* PersonsListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonsListTableViewController.swift; sourceTree = "<group>"; };
 		CB17A4AE28355FB400C42932 /* SLesson1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SLesson1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB17A4B128355FB400C42932 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CB17A4B328355FB400C42932 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +91,8 @@
 				CBA9F24F283BF2C1001FE71F /* ViewControllers */,
 				CBA9F24E283BF2B3001FE71F /* Main */,
 				CB17A4B728355FB400C42932 /* Main.storyboard */,
+				CB151B95284E722D003B364C /* PersonsElementTableViewCell.swift */,
+				CB151B96284E722D003B364C /* PersonsElementTableViewCell.xib */,
 				CB17A4BD28355FB500C42932 /* Assets.xcassets */,
 				CB17A4BF28355FB500C42932 /* LaunchScreen.storyboard */,
 				CB17A4C228355FB500C42932 /* Info.plist */,
@@ -117,6 +127,8 @@
 		CBA9F24F283BF2C1001FE71F /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				CB151B99284E7251003B364C /* PersonsListTableViewController.swift */,
+				CB151B93284E7070003B364C /* PersonsListViewController.swift */,
 				CB5EFCA0283935C7002D9858 /* ResultViewController.swift */,
 				CB17A4B528355FB400C42932 /* ViewController.swift */,
 				CBA9F250283BF86A001FE71F /* DifficultyViewController.swift */,
@@ -186,6 +198,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB45DD21284D35C700FF0568 /* a3.mp3 in Resources */,
+				CB151B98284E722D003B364C /* PersonsElementTableViewCell.xib in Resources */,
 				CB45DD24284D35C700FF0568 /* a4.mp3 in Resources */,
 				CB17A4C128355FB500C42932 /* LaunchScreen.storyboard in Resources */,
 				CB17A4BE28355FB500C42932 /* Assets.xcassets in Resources */,
@@ -209,9 +222,12 @@
 				CBA9F24D283BF29A001FE71F /* data.swift in Sources */,
 				CB17A4B628355FB400C42932 /* ViewController.swift in Sources */,
 				CBA9F251283BF86A001FE71F /* DifficultyViewController.swift in Sources */,
+				CB151B9A284E7251003B364C /* PersonsListTableViewController.swift in Sources */,
+				CB151B97284E722D003B364C /* PersonsElementTableViewCell.swift in Sources */,
 				CB17A4BC28355FB400C42932 /* SLesson1.xcdatamodeld in Sources */,
 				CB17A4B228355FB400C42932 /* AppDelegate.swift in Sources */,
 				CB17A4B428355FB400C42932 /* SceneDelegate.swift in Sources */,
+				CB151B94284E7070003B364C /* PersonsListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

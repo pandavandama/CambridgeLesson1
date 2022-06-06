@@ -32,6 +32,12 @@ class DifficultyViewController: UIViewController {
         showNextViewController()
     }
     
+    @IBAction func showPersonsView(_ sender: UIButton) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "personsView")
+        nextViewController.modalPresentationStyle = .fullScreen
+        self.present(nextViewController, animated: false, completion: nil)
+    }
     func showNextViewController(){
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "gameView")
