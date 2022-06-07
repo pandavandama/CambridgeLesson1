@@ -10,15 +10,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="170" id="KGk-i7-Jjw" customClass="PersonsElementTableViewCell" customModule="SLesson1" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="382" height="170"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="370" id="KGk-i7-Jjw" customClass="PersonsElementTableViewCell" customModule="SLesson1" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="382" height="370"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="382" height="170"/>
+                <rect key="frame" x="0.0" y="0.0" width="382" height="370"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="abZ-Mi-aQf">
-                        <rect key="frame" x="0.0" y="0.0" width="382" height="160"/>
+                        <rect key="frame" x="0.0" y="0.0" width="382" height="360"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7HG-xZ-pHF">
                                 <rect key="frame" x="16" y="16" width="350" height="21"/>
@@ -38,6 +38,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="x5E-c4-KJ2">
+                                <rect key="frame" x="91" y="127" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="0Pu-Lh-Sob"/>
+                                    <constraint firstAttribute="height" constant="200" id="lj3-kl-nnY"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemGray2Color"/>
                         <constraints>
@@ -47,8 +54,10 @@
                             <constraint firstItem="JOk-zD-wCh" firstAttribute="top" secondItem="hfc-hv-yiU" secondAttribute="bottom" constant="16" id="9F4-9h-onW"/>
                             <constraint firstItem="7HG-xZ-pHF" firstAttribute="top" secondItem="abZ-Mi-aQf" secondAttribute="top" constant="16" id="CIl-nZ-o4r"/>
                             <constraint firstItem="7HG-xZ-pHF" firstAttribute="leading" secondItem="abZ-Mi-aQf" secondAttribute="leading" constant="16" id="E6n-BW-lpP"/>
+                            <constraint firstItem="x5E-c4-KJ2" firstAttribute="top" secondItem="JOk-zD-wCh" secondAttribute="bottom" constant="16" id="TGh-VU-Kys"/>
                             <constraint firstItem="hfc-hv-yiU" firstAttribute="top" secondItem="7HG-xZ-pHF" secondAttribute="bottom" constant="16" id="e03-dZ-Ogm"/>
                             <constraint firstAttribute="trailing" secondItem="hfc-hv-yiU" secondAttribute="trailing" constant="16" id="jKz-ua-o9o"/>
+                            <constraint firstItem="x5E-c4-KJ2" firstAttribute="centerX" secondItem="abZ-Mi-aQf" secondAttribute="centerX" id="jad-Jy-ofL"/>
                             <constraint firstItem="JOk-zD-wCh" firstAttribute="leading" secondItem="abZ-Mi-aQf" secondAttribute="leading" constant="16" id="tT4-18-NuM"/>
                         </constraints>
                     </view>
@@ -67,8 +76,9 @@
                 <outlet property="hairColorLabel" destination="JOk-zD-wCh" id="WhY-DK-1YL"/>
                 <outlet property="heightLabel" destination="hfc-hv-yiU" id="RFd-CY-9yD"/>
                 <outlet property="nameLabel" destination="7HG-xZ-pHF" id="eum-Fb-tdc"/>
+                <outlet property="personImageView" destination="x5E-c4-KJ2" id="H4e-Az-fx0"/>
             </connections>
-            <point key="canvasLocation" x="176.81159420289856" y="174.10714285714286"/>
+            <point key="canvasLocation" x="176.81159420289856" y="240.40178571428569"/>
         </tableViewCell>
     </objects>
     <resources>

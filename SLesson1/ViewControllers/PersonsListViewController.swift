@@ -16,6 +16,7 @@ class PersonsListViewController: UIViewController, UITableViewDelegate, UITableV
     
     
     var personsList: PersonsList?
+    var imageList: [Data] = []
     var cellCount: Int = 0
     
     
@@ -26,9 +27,35 @@ class PersonsListViewController: UIViewController, UITableViewDelegate, UITableV
         super.viewDidLoad()
         
         tableView.register(PersonsElementTableViewCell.nib(), forCellReuseIdentifier: PersonsElementTableViewCell.ID)
+        
+        
+        makeRequest(callback: {
+            self.tableView.reloadData()
+        })
+        
         tableView.delegate = self
         tableView.dataSource = self
         
+        // Do any additional setup after loading the view.
+    }
+    
+    func getRandomImage(callback: @escaping ((Data)->Void)){
+        let randomImageLink = URL(string: "https://picsum.photos/200")
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: randomImageLink!) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        print("zapros")
+//                        self?.imageList.append(data)
+                        callback(data)
+                    }
+                }
+            }
+        }
+        
+    }
+    
+    func makeRequest(callback: @escaping (() -> Void)){
         let sharedSession = URLSession.shared
         
         if let url = URL(string: "https://swapi.dev/api/people/"){
@@ -38,7 +65,7 @@ class PersonsListViewController: UIViewController, UITableViewDelegate, UITableV
                 
                 if let data = data{
                     DispatchQueue.main.async {
-                        
+                        print("zapros")
                         let json = String(data: data, encoding: .utf8)!
                         let decoder = JSONDecoder()
                         do{
@@ -47,7 +74,7 @@ class PersonsListViewController: UIViewController, UITableViewDelegate, UITableV
                             self.personsList = res
                             print(self.personsList!.results)
                             self.cellCount = self.personsList!.results.count
-                            self.tableView.reloadData()
+                            callback()
                         }catch{
                             print(error)
                         }
@@ -56,13 +83,10 @@ class PersonsListViewController: UIViewController, UITableViewDelegate, UITableV
             })
             dataTask.resume()
         }
-        
-        
-        // Do any additional setup after loading the view.
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 170
+        return 370
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -76,7 +100,29 @@ class PersonsListViewController: UIViewController, UITableViewDelegate, UITableV
         
         if(personsList != nil){
             do{
-                cell.nameLabel!.text = personsList?.results[indexPath.row].name
+                cell.nameLabel?.text = personsList?.results[indexPath.row].name
+                
+
+                if !dataApp.personsImageDataList.indices.contains(indexPath.row){
+                        print("test")
+                    getRandomImage(callback: { data in
+                        dataApp.personsImageDataList.append(data)
+                        
+                        if !dataApp.personsImageDataList.isEmpty && dataApp.personsImageDataList.indices.contains(indexPath.row) {
+                            cell.personImageView.image = UIImage(data: dataApp.personsImageDataList[indexPath.row])
+                        }
+//                        print(self.imageList)
+                    })
+                }else{
+                    if !dataApp.personsImageDataList.isEmpty && dataApp.personsImageDataList.indices.contains(indexPath.row) {
+                        cell.personImageView.image = UIImage(data: dataApp.personsImageDataList[indexPath.row])
+                    }
+                }
+
+                
+
+                
+                
             }
             catch{
                 print(error)

@@ -10,4 +10,5 @@ import Foundation
 struct dataApp{
     static var result: Bool = false
     static var triesMax: Int?
+    static var personsImageDataList: [Data] = []
 }

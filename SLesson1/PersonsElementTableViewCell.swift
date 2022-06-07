@@ -21,6 +21,8 @@ class PersonsElementTableViewCell: UITableViewCell {
     
     @IBOutlet weak var hairColorLabel: UILabel!
     
+    @IBOutlet weak var personImageView: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
